@@ -2,17 +2,20 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Rol;
 use App\Models\Permiso;
 use App\Models\Persona;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Notifiable;
+    use CanResetPassword;
 
     protected $primaryKey = 'usu_id';
     protected $table = 'res_usuario';
@@ -31,7 +34,7 @@ class User extends Model implements AuthenticatableContract
         'usu_clave',
         'usu_fecreg',
         'usu_estado',
-        'rol_id'
+        'rol_id',
     ];
 
     /**
@@ -111,6 +114,10 @@ class User extends Model implements AuthenticatableContract
     public function getRememberTokenName()
     {
         return 'remember_token';
+    }
+
+    public function getEmailForPasswordReset(){
+        return $this->usu_email;
     }
 
     public function rol()

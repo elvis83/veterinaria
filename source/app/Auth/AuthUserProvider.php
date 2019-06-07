@@ -60,9 +60,15 @@ class AuthUserProvider implements UserProvider {
      */
     public function retrieveByCredentials(array $credentials)
     {
-        $query = User::where('usu_user', '=', $credentials['username']);
-        if($query->count()>0) {
-            return $query->first();
+        if(!empty($credentials['username']))
+        {
+            $user = User::where('usu_user', '=', $credentials['username']);
+        }
+        if(!empty($credentials['email'])){
+            $user = User::where('usu_email', '=', $credentials['email']);
+        }
+        if($user->count()>0) {
+            return $user->first();
         }
         return null;
     }
