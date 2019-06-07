@@ -23,4 +23,11 @@ class Permiso extends Model
     {
         return $this->belongsTo(Rol::class, 'rol_id', 'rol_id');
     }
+
+    public function getValueAttribute() {
+        if(!empty($this->relations['pivot']['valor'])) {
+            return $this->relations['pivot']['valor'];
+        }
+        return $this->default_value;
+    }
 }

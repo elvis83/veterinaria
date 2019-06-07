@@ -139,10 +139,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function getPermiso($nombre)
     {
         $rs = $this->permisos()->where('perm_nombre', $nombre)->first();
+        $state = 0;
         if($rs) {
-            $valor = $rs->relations['pivot']->valor;
-            return $valor == 1;
+            $state = $rs->relations['pivot']->valor;
+            
+        } else {
+            $rs = Permiso::where('perm_nombre', $nombre)->first();
+            if($rs) 
+            {
+                $state = $rs->default_value;
+            }
         }
-        return $rs;
+        return $state == 1;;
     }
 }

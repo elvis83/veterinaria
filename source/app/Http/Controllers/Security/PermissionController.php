@@ -21,4 +21,31 @@ class PermissionController extends Controller
             throw new NotAuthorizedException();
         }
     }
+
+    public function create(){
+        if(Auth::user()->getPermiso(PermisoOpcion::PERMISO_CREAR))
+        {
+            return view('permissions.create');
+        } else {
+            throw new NotAuthorizedException();
+        }
+    }
+
+    public function edit($id) {
+        if(Auth::user()->getPermiso(PermisoOpcion::PERMISO_CREAR))
+        {
+            $permission = Permiso::where('permiso_id', $id)->first();
+            return view('permissions.create', compact('permission'));
+        } else {
+            throw new NotAuthorizedException();
+        }
+    }
+
+    public function store(Request $request) {
+
+    }
+
+    public function update($id, Request $request) {
+
+    }
 }

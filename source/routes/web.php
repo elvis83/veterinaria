@@ -27,9 +27,11 @@ Route::group([
     Route::put('/users/{id}', 'Security\UserController@update')->name('users.update');
 
     Route::get('/permissions', 'Security\PermissionController@index')->name('permissions.index');
-    Route::get('/permissions/{id}', 'Security\PermissionController@show')->name('permissions.show');
-    Route::get('/permissions/{id}/edit', 'Security\PermissionController@edit')->name('permissions.edit');
+    Route::get('/permissions/{id}', 'Security\PermissionController@show')->name('permissions.show')->where(['id'=>'[0-9]+']);
+    Route::get('/permissions/{id}/edit', 'Security\PermissionController@edit')->name('permissions.edit')->where(['id'=>'[0-9]+']);
+    Route::get('/permissions/create', 'Security\PermissionController@create')->name('permissions.create');
+    Route::delete('/permissions/{id}', 'Security\PermissionController@destroy')->name('permissions.destroy');
+    
     Route::get('/permissions/asigned/{user_id}/', 'Security\AsignedPermissionsController@index')->name('permissions.asigned.index');
     Route::post('/permissions/asigned/{user_id}/', 'Security\AsignedPermissionsController@store')->name('permissions.asigned.store');
-    Route::put('/permissions/asigned/{user_id}/', 'Security\AsignedPermissionsController@update')->name('permissions.asigned.update');
 });

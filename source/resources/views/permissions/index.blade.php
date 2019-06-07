@@ -11,6 +11,9 @@
     <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">Lista de permisos</div>
+            <div class="actions">
+                <a href="{{ route('permissions.create') }}" class="btn btn-sm default"><i class="icon-plus"></i> Crear</a>
+            </div>
         </div>
         <div class="portlet-body">
             <div class="table-responsive">
@@ -40,7 +43,7 @@
                 </table>
             </div>
             <div class="form-actions">
-                
+                {!! $permissions->links() !!}
             </div>
         </div>
     </div>

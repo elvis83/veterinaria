@@ -14,4 +14,6 @@ class PermisoOpcion {
 
     public const PERMISO_ASIGNAR = 'permissions.asigned';
     public const PERMISO_LISTAR = 'permissions.list';
+    public const PERMISO_CREAR = 'permissions.insert';
+    public const PERMISO_EDITAR = 'permissions.edit';
 }
