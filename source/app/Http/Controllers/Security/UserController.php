@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Exceptions\NotAuthorizedException;
 use App\Models\Persona;
+use App\Models\Medico;
 use App\Models\Rol;
 use Exception;
 use Carbon\Carbon;
@@ -30,7 +31,7 @@ class UserController extends Controller
 
     public function create() {
         if(Auth::user()->getPermiso(PermisoOpcion::USUARIO_CREAR)) {
-            $persons = Persona::get();
+            $persons = Medico::where('med_estado', 'A')->get();
             $roles = Rol::where('rol_estado', '1')->get();
             return view('users.create', compact('persons', 'roles'));
         } else {
@@ -41,7 +42,7 @@ class UserController extends Controller
     public function edit($id) {
         if(Auth::user()->getPermiso(PermisoOpcion::USUARIO_EDITAR)) {
             $user = User::where('usu_id', $id)->first();
-            $persons = Persona::get();
+            $persons = Medico::where('med_estado', 'A')->get();
             $roles = Rol::where('rol_estado', '1')->get();
             $resetPassword = Auth::user()->getPermiso(PermisoOpcion::USUARIO_PASSWORD_RESSET);
             return view('users.edit', compact('user', 'persons', 'roles', 'resetPassword'));
@@ -64,7 +65,7 @@ class UserController extends Controller
                 'med_id' => $request->input('med_id'),
                 'rol_id' => $request->input('rol_id'),
                 'usu_fecreg' => Carbon::now(),
-                
+                'usu_clave' => sha1($request->input('usu_clave'))
             ]);
 
             return redirect()->route('users.index')->with('message.success', 'Se ha guardado correctamente el registro.');

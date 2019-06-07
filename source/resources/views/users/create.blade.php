@@ -7,6 +7,7 @@
             <h1>Registro de usuario</h1>
         </div>
     </div>
+    @include('partials.alerts')
     <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">Crear usuario</div>
@@ -40,7 +41,7 @@
                         <select required="required" name="med_id" id="med_id" class="form-control select2me">
                             <option value="">-- SELECCIONE --</option>
                             @foreach ($persons as $item)
-                            <option {{ old('med_id') == $item->per_id ? 'selected' : '' }} value="{{ $item->per_id }}">{{ $item->per_apepat }} {{ $item->per_apemat }}, {{ $item->per_nombres }}</option>
+                            <option {{ old('med_id') == $item->persona->per_id ? 'selected' : '' }} value="{{ $item->persona->per_id }}">{{ $item->persona->per_apepat }} {{ $item->persona->per_apemat }}, {{ $item->persona->per_nombres }}</option>
                             @endforeach
                         </select>
                     </div>
