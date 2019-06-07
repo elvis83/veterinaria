@@ -60,7 +60,7 @@
                                 <select required="required" name="rol_id" id="rol_id" class="form-control select2me">
                                     <option value="">-- SELECCIONE --</option>
                                     @foreach ($roles as $item)
-                                    <option {{ old('rol_id', $user->rol_id) == $item->rol_id ? 'selected' : '' }} value="{{ $item->rol_id }}">{{ $item->rol_nombre }}</option>
+                                    <option {{ old('rol_id') == $item->rol_id ? 'selected' : '' }} value="{{ $item->rol_id }}">{{ $item->rol_nombre }}</option>
                                     @endforeach
                                 </select>
                             </div>

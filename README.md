@@ -29,9 +29,17 @@ DB_PASSWORD=developer@94`
 MAIL_DRIVER=smtp
 MAIL_HOST=smtp-mail.outlook.com
 MAIL_PORT=587
-MAIL_USERNAME=null
-MAIL_PASSWORD=
+MAIL_USERNAME=TU_EMAIL
+MAIL_PASSWORD=TU_CONTRASEÑA
 MAIL_ENCRYPTION=ssl
-MAIL_FROM_ADDRESS=null
-MAIL_FROM_NAME=Test
+MAIL_FROM_ADDRESS=TU_EMAIL
+MAIL_FROM_NAME=TU_NOMBRE_CABECERA
 ```
+
+# Panel Administrador
+- Credenciales
+    - Las contraseñas de todos los usuarios la cambie,  `123456` para todos.
+    - Las contraseñas tiene estan encriptadas con `sha1`
+- Permisos
+    - La tabla `seg_permiso_usuario` contiene con permisos por usuario; el campo valor contiene dos valores `0` inactivo y `1` activo.
+    - Al cambiar el permiso del usuario con valor `0` en la pagina le mostrará una página de con error de `Pagina no autorizada`
