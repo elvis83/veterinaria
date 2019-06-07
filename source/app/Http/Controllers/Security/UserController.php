@@ -12,6 +12,7 @@ use App\Models\Persona;
 use App\Models\Rol;
 use Exception;
 use Carbon\Carbon;
+use App\Models\Permiso;
 
 class UserController extends Controller
 {
@@ -20,7 +21,8 @@ class UserController extends Controller
         if(Auth::user()->getPermiso(PermisoOpcion::USUARIO_LISTAR))
         {
             $users = User::with('rol')->with('persona')->paginate();
-            return view('users.index', compact('users'));
+            $asignedPermission = Auth::user()->getPermiso(PermisoOpcion::PERMISO_ASIGNAR);
+            return view('users.index', compact('users', 'asignedPermission'));
         } else {
             throw new NotAuthorizedException();
         }
@@ -41,7 +43,8 @@ class UserController extends Controller
             $user = User::where('usu_id', $id)->first();
             $persons = Persona::get();
             $roles = Rol::where('rol_estado', '1')->get();
-            return view('users.edit', compact('user', 'persons', 'roles'));
+            $resetPassword = Auth::user()->getPermiso(PermisoOpcion::USUARIO_PASSWORD_RESSET);
+            return view('users.edit', compact('user', 'persons', 'roles', 'resetPassword'));
         } else {
             throw new NotAuthorizedException();
         }
@@ -80,6 +83,11 @@ class UserController extends Controller
                 'med_id' => $request->input('med_id'),
                 'rol_id' => $request->input('rol_id')
             ]);
+            if(!empty($request->input('usu_clave'))) {
+                $user->update([
+                    'usu_clave' => sha1($request->input('usu_clave'))
+                ]);
+            }
             return redirect()->route('users.index')->with('message.success', 'Se ha actualizado correctamente el registro.');
         } catch(Exception $ex){
             return back()->with('message.danger', $ex->getMessage());

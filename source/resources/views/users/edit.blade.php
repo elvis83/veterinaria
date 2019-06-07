@@ -66,15 +66,18 @@
                                 </select>
                             </div>
                         </div>
+                        @if ($resetPassword)
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="usu_clave" class="control-label">Contraseña</label>
                                 <div class="input-icon">
                                     <i class="icon-lock"></i>
                                     <input value="{{ old('usu_clave') }}" id="usu_clave" name="usu_clave" type="password" class="form-control" />
+                                    <small>* La contraseña solo se actualizará solo si escribe aquí</small>
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
                 <div class="form-actions">

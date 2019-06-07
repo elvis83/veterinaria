@@ -12,5 +12,6 @@ class PermisoOpcion {
     public const USUARIO_ELIMINAR = 'users.delete';
     public const USUARIO_PASSWORD_RESSET = 'users.password.reset';
 
+    public const PERMISO_ASIGNAR = 'permissions.asigned';
     public const PERMISO_LISTAR = 'permissions.list';
 }

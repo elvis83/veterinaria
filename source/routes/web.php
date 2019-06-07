@@ -29,4 +29,7 @@ Route::group([
     Route::get('/permissions', 'Security\PermissionController@index')->name('permissions.index');
     Route::get('/permissions/{id}', 'Security\PermissionController@show')->name('permissions.show');
     Route::get('/permissions/{id}/edit', 'Security\PermissionController@edit')->name('permissions.edit');
+    Route::get('/permissions/asigned/{user_id}/', 'Security\AsignedPermissionsController@index')->name('permissions.asigned.index');
+    Route::post('/permissions/asigned/{user_id}/', 'Security\AsignedPermissionsController@store')->name('permissions.asigned.store');
+    Route::put('/permissions/asigned/{user_id}/', 'Security\AsignedPermissionsController@update')->name('permissions.asigned.update');
 });

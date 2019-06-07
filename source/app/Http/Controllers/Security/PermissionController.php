@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\PermisoOpcion;
 use App\Exceptions\NotAuthorizedException;
+use App\Models\Permiso;
 
 class PermissionController extends Controller
 {
@@ -14,7 +15,8 @@ class PermissionController extends Controller
     {
         if(Auth::user()->getPermiso(PermisoOpcion::PERMISO_LISTAR))
         {
-            return view('permissions.index');
+            $permissions = Permiso::with('rol')->paginate();
+            return view('permissions.index', compact('permissions'));
         } else {
             throw new NotAuthorizedException();
         }
