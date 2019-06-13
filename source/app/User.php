@@ -11,6 +11,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use App\Models\Medico;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -125,9 +126,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsTo(Rol::class, 'rol_id', 'rol_id');
     }
 
-    public function persona()
+    public function medico()
     {
-        return $this->belongsTo(Persona::class, 'med_id', 'per_id');
+        return $this->belongsTo(Medico::class, 'med_id', 'med_id');
     }
 
     public function permisos()

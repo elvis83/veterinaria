@@ -147,6 +147,7 @@
 
     <script src="{{ asset('assets/global/scripts/metronic.js') }}"></script>
     <script src="{{ asset('assets/admin/layout/scripts/layout.js') }}"></script>
+    <script src="{{ asset('js/password.js') }}"></script>
     
     @yield('scripts-links')
 

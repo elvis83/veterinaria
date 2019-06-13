@@ -22,6 +22,7 @@ Route::group([
     Route::get('/users', 'Security\UserController@index')->name('users.index');
     Route::get('/users/create', 'Security\UserController@create')->name('users.create');
     Route::get('/users/{id}', 'Security\UserController@show')->name('users.show');
+    Route::delete('/users/{id}', 'Security\UserController@destroy')->name('users.destroy');
     Route::get('/users/{id}/edit', 'Security\UserController@edit')->name('users.edit');
     Route::post('/users', 'Security\UserController@store')->name('users.store');
     Route::put('/users/{id}', 'Security\UserController@update')->name('users.update');

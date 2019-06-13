@@ -21,7 +21,7 @@ class UserController extends Controller
     {
         if(Auth::user()->getPermiso(PermisoOpcion::USUARIO_LISTAR))
         {
-            $users = User::with('rol')->with('persona')->paginate();
+            $users = User::with('rol')->with('medico.persona')->paginate();
             $asignedPermission = Auth::user()->getPermiso(PermisoOpcion::PERMISO_ASIGNAR);
             return view('users.index', compact('users', 'asignedPermission'));
         } else {
@@ -90,6 +90,15 @@ class UserController extends Controller
                 ]);
             }
             return redirect()->route('users.index')->with('message.success', 'Se ha actualizado correctamente el registro.');
+        } catch(Exception $ex){
+            return back()->with('message.danger', $ex->getMessage());
+        }
+    }
+
+    public function destroy($id) {
+        try {
+            User::where('usu_id', $id)->delete();
+            return redirect()->route('users.index')->with('message.success', 'Se ha eliminado correctamente el registro.');
         } catch(Exception $ex){
             return back()->with('message.danger', $ex->getMessage());
         }

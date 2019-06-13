@@ -36,7 +36,7 @@
                                     <td>{{ $item->usu_user }}</td>
                                     <td>{{ $item->usu_email }}</td>
                                     <td>{{ $item->rol->rol_nombre }}</td>
-                                    <td>{{ $item->persona->per_apepat }} {{ $item->persona->per_apemat }}, {{ $item->persona->per_nombres }}</td>
+                                    <td>{{ $item->medico->persona->per_apepat }} {{ $item->medico->persona->per_apemat }}, {{ $item->medico->persona->per_nombres }}</td>
                                     <td>
                                         <div class="btn-group btn-group-xs">
                                             <a title="Editar" class="btn btn-xs blue" href="{{ route('users.edit', ['id' => $item->usu_id]) }}"><i class="icon-pencil"></i></a>
@@ -44,7 +44,11 @@
                                             <a title="Asignar permisos" class="btn btn-xs green" href="{{ route('permissions.asigned.index', ['user_id' => $item->usu_id]) }}"><i class="icon-lock"></i></a>
                                             @endif
                                             {{--<a class="btn btn-xs" href="#"><i class="icon-magnifier"></i></a>--}}
-                                            {{--<a title="eliminar" class="btn btn-xs red" href="#"><i class="icon-trash"></i></a>--}}
+                                            <form id="frm-{{ $item->usu_id}}" style="display: inline-flex;" method="POST" action="{{ route('users.destroy', ['id'=>$item->usu_id]) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <a title="eliminar" class="btn btn-xs red" href="javascript: destroy({{$item->usu_id}})"><i class="icon-trash"></i></a>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
@@ -60,4 +64,15 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+function destroy(id) {
+    var rs = confirm('¿Desea eliminar el usuario?');
+    if(rs) {
+        $('#frm-'+id).submit();
+    }
+}
+</script>
 @endsection

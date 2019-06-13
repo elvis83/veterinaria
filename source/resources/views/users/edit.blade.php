@@ -41,7 +41,7 @@
                         <select required="required" name="med_id" id="med_id" class="form-control select2me">
                             <option value="">-- SELECCIONE --</option>
                             @foreach ($persons as $item)
-                            <option {{ old('med_id', $user->med_id) == ''.$item->persona->per_id ? 'selected' : '' }} value="{{ $item->persona->per_id }}">{{ $item->per_apepat }} {{ $item->persona->per_apemat }}, {{ $item->persona->per_nombres }}</option>
+                            <option {{ old('med_id', $user->med_id) == ''.$item->med_id ? 'selected' : '' }} value="{{ $item->med_id }}">{{ $item->per_apepat }} {{ $item->persona->per_apemat }}, {{ $item->persona->per_nombres }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -70,11 +70,17 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="usu_clave" class="control-label">Contraseña</label>
-                                <div class="input-icon">
-                                    <i class="icon-lock"></i>
-                                    <input value="{{ old('usu_clave') }}" id="usu_clave" name="usu_clave" type="password" class="form-control" />
-                                    <small>* La contraseña solo se actualizará solo si escribe aquí</small>
+                                <div class="input-group" role="password">
+                                    <div class="input-icon">
+                                        <i class="icon-lock"></i>
+                                        <input required="required" value="{{ old('usu_clave') }}" id="usu_clave" name="usu_clave" type="password" class="form-control" />
+                                    </div>
+                                    <div class="input-group-btn">
+                                        <button role="hide" class="btn default" type="button"><i class="icon-eye"></i></button>
+                                        <button role="random" title="Generar" class="btn green tooltips" type="button"><i class="icon-reload"></i></button>
+                                    </div>
                                 </div>
+                                <small>* La contraseña solo se actualizará solo si escribe aquí</small>
                             </div>
                         </div>
                         @endif
